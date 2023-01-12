@@ -30,9 +30,11 @@ app.post("/", (req, res) => {
     if (err) res.status(500).send({ error: err });
 
     for (const file of files) {
-      fs.unlink(path.join(directory, file), (err) => {
-        if (err) res.status(500).send({ error: err });
-      });
+      if (file != "upload_folder.txt") {
+        fs.unlink(path.join(directory, file), (err) => {
+          if (err) res.status(500).send({ error: err });
+        });
+      }
     }
   });
 
